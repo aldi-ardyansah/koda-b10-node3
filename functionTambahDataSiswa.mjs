@@ -23,7 +23,7 @@ async function tambahDataSiswa(app) {
 
     siswa.push(siswaBaru);
 
-    await app.simpanDataSiswa(siswa);
+    await app.simpanDataSiswa(app, siswa);
 
     console.log("Data siswa berhasil disimpan!");
 }

@@ -19,7 +19,7 @@ async function bacaDataSiswa(app) {
         return siswa;
     } catch (error) {
         if (error.code === "ENOENT") {
-            await app.simpanDataSiswa([]);
+            await app.simpanDataSiswa(app, []);
             return [];
         }
 

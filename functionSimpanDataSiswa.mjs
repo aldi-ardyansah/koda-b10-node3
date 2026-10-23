@@ -1,6 +1,6 @@
 export default simpanDataSiswa;
 
-// Menyimpan data siswa ke file JSON
+// Menyimpan file data siswa ke JSON
 async function simpanDataSiswa(app, siswa) {
     const data = JSON.stringify(siswa, null, 4);
 
