@@ -3,6 +3,7 @@ import { stdin as input, stdout as output } from "node:process";
 import fs from "node:fs/promises";
 
 import bacaDataSiswa from "./functionBacaDataSiswa.mjs";
+import tambahDataSiswa from "./functionTambahDataSiswa.mjs";
 
 const dataSiswa = "dataSiswa.json";
 
@@ -17,33 +18,7 @@ async function simpanDataSiswa(siswa) {
     await fs.writeFile(dataSiswa, data + "\n", "utf8");
 }
 
-// Menambahkan data siswa
-async function tambahDataSiswa() {
-    const siswa = await bacaDataSiswa(app);
 
-    console.log("\n=== INPUT DATA SISWA ===");
-
-    const nis = (await rl.question("NIS: ")).trim();
-    const nama = (await rl.question("Nama: ")).trim();
-    const kelas = (await rl.question("Kelas: ")).trim();
-
-    if (!nis || !nama || !kelas) {
-        console.log("Semua data wajib diisi.");
-        return;
-    }
-
-    const siswaBaru = {
-        nis,
-        nama,
-        kelas
-    };
-
-    siswa.push(siswaBaru);
-
-    await simpanDataSiswa(siswa);
-
-    console.log("Data siswa berhasil disimpan!");
-}
 
 // Membaca dan menampilkan data siswa
 async function tampilkanDataSiswa() {
@@ -112,6 +87,7 @@ main().catch((error) => {
 
 // Kumpulan property yang disimpan dalam parameter app
 const app = {
+    rl,
     fs,
     dataSiswa,
     bacaDataSiswa,
