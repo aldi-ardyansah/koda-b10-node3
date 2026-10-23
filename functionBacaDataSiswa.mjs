@@ -3,11 +3,17 @@ export default bacaDataSiswa;
 // Fungsi membaca data siswa dari file JSON
 async function bacaDataSiswa(app) {
     try {
-        const data = await app.fs.readFile(app.dataSiswa, "utf8");
+        const data = await app.fs.readFile(
+            app.dataSiswa,
+            "utf8"
+        );
+
         const siswa = JSON.parse(data);
 
         if (!Array.isArray(siswa)) {
-            throw new Error("Format database harus berupa array.");
+            throw new Error(
+                "Format database harus berupa array."
+            );
         }
 
         return siswa;
