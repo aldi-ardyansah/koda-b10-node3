@@ -19,7 +19,7 @@ async function simpanDataSiswa(siswa) {
 
 // Menambahkan data siswa
 async function tambahDataSiswa() {
-    const siswa = await bacaDataSiswa();
+    const siswa = await bacaDataSiswa(app);
 
     console.log("\n=== INPUT DATA SISWA ===");
 
@@ -47,7 +47,7 @@ async function tambahDataSiswa() {
 
 // Membaca dan menampilkan data siswa
 async function tampilkanDataSiswa() {
-    const siswa = await bacaDataSiswa();
+    const siswa = await bacaDataSiswa(app);
 
     console.log("\n=== DAFTAR SISWA ===");
 
@@ -112,7 +112,7 @@ main().catch((error) => {
 
 // Kumpulan property yang disimpan dalam parameter app
 const app = {
-    rl,
+    fs,
     dataSiswa,
     bacaDataSiswa,
     simpanDataSiswa
