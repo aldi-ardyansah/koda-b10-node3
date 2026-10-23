@@ -1,44 +1,20 @@
 import readline from "node:readline/promises";
 import { stdin as input, stdout as output } from "node:process";
 import fs from "node:fs/promises";
-import path from "node:path";
-import { fileURLToPath } from "node:url";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+import bacaDataSiswa from "./functionBacaDataSiswa.mjs";
 
-const FILE = path.join(__dirname, "dataSiswa.json");
+const dataSiswa = "dataSiswa.json";
 
 const rl = readline.createInterface({
     input,
     output
 });
 
-// Membaca data siswa dari file JSON
-async function bacaDataSiswa() {
-    try {
-        const data = await fs.readFile(FILE, "utf8");
-        const siswa = JSON.parse(data);
-
-        if (!Array.isArray(siswa)) {
-            throw new Error("Format database harus berupa array.");
-        }
-
-        return siswa;
-    } catch (error) {
-        if (error.code === "ENOENT") {
-            await simpanDataSiswa([]);
-            return [];
-        }
-
-        throw error;
-    }
-}
-
 // Menyimpan data siswa ke file JSON
 async function simpanDataSiswa(siswa) {
     const data = JSON.stringify(siswa, null, 4);
-    await fs.writeFile(FILE, data + "\n", "utf8");
+    await fs.writeFile(dataSiswa, data + "\n", "utf8");
 }
 
 // Menambahkan data siswa
@@ -112,8 +88,7 @@ async function main() {
 
                     case "0":
                         berjalan = false;
-                        console.log("");
-                        console.log("Program selesai.");
+                        console.log("\nProgram selesai.");
                         break;
 
                     default:
@@ -134,3 +109,14 @@ async function main() {
 main().catch((error) => {
     console.error("Program gagal:", error.message);
 });
+
+// Kumpulan property yang disimpan dalam parameter app
+const app = {
+    rl,
+    dataSiswa,
+    bacaDataSiswa,
+    simpanDataSiswa
+};
+
+// Memanggil functions dengan parameter app
+await bacaDataSiswa(app);
