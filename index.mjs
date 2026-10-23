@@ -5,6 +5,7 @@ import fs from "node:fs/promises";
 import tampilkanDataSiswa from "./functionTampilkanDataSiswa.mjs";
 import bacaDataSiswa from "./functionBacaDataSiswa.mjs";
 import tambahDataSiswa from "./functionTambahDataSiswa.mjs";
+import simpanDataSiswa from "./functionSimpanDataSiswa.mjs";
 
 const dataSiswa = "dataSiswa.json";
 
@@ -12,12 +13,6 @@ const rl = readline.createInterface({
     input,
     output
 });
-
-// Menyimpan data siswa ke file JSON
-async function simpanDataSiswa(siswa) {
-    const data = JSON.stringify(siswa, null, 4);
-    await fs.writeFile(dataSiswa, data + "\n", "utf8");
-}
 
 // Kumpulan property yang disimpan dalam parameter app
 const app = {
